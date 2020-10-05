@@ -21,6 +21,7 @@ module.exports = function () {
   require("../src/app/routes/indexRoute")(app);
   require("../src/app/routes/userRoute")(app);
   require("../src/app/routes/testRoute")(app);
+  require("../src/app/routes/homeRoute")(app);
 
   /* Web */
   // require('../src/web/routes/indexRoute')(app);
