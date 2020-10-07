@@ -1,5 +1,15 @@
 const { pool } = require("../../../config/database");
 const { logger } = require("../../../config/winston");
+const path = require('path');
+const express = require('express');
+const app = express();
+
+app.use(express.static(path.join(__dirname, 'html')));
+
+exports.main = async function (req, res) {
+  res.sendFile(path.join(__dirname, 'html', 'main.html'));
+};
+
 
 exports.practice = async function (req, res) {
   console.log("GET 메소드를 사용하느 /test 라우팅 연결이 성공하였습니다.");

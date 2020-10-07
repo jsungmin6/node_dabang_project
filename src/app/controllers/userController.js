@@ -6,6 +6,9 @@ const regexEmail = require("regex-email");
 const crypto = require("crypto");
 const secret_config = require("../../../config/secret");
 
+var passport = require('passport');
+
+
 /**
  update : 2019.11.01
  01.signUp API = 회원가입
@@ -270,4 +273,14 @@ exports.check = async function (req, res) {
     message: "검증 성공",
     info: req.verifiedToken,
   });
+};
+
+exports.kakao = async function (req, res, next) { passport.authenticate('kakao')(req, res, next); };
+
+exports.kakaoSignIn = async function (req, res, next) {
+  passport.authenticate('kakao', {
+    failureRedirect: '/',
+  }), (req, res) => {
+    res.redirect('/');
+  };
 };
