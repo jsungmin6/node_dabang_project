@@ -7,6 +7,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'html')));
 
 exports.main = async function (req, res) {
+  console.log('메인페이지 실행')
   res.sendFile(path.join(__dirname, 'html', 'main.html'));
 };
 

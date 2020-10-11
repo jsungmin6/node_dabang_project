@@ -20,8 +20,6 @@ module.exports = function () {
 
   app.use(cors());
   // app.use(express.static(process.cwd() + '/public'));
-  app.use(passport.initialize())
-  app.use(passport.session())
 
   /* App (Android, iOS) */
   require("../src/app/routes/indexRoute")(app);

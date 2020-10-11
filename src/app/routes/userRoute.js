@@ -7,6 +7,6 @@ module.exports = function (app) {
   app.route("/app/signIn").post(user.signIn);
 
   app.get("/check", jwtMiddleware, user.check);
-  app.route("/logIn/kakao/callback").post(user.kakaoSignIn);
+  app.get("/logIn/kakao/callback", user.kakaoSignIn);
   app.get('/kakao', user.kakao);
 };
