@@ -279,6 +279,7 @@ exports.kakao = async function (req, res, next) { passport.authenticate('kakao')
 
 exports.kakaoSignIn = async function (req, res, next) {
   passport.authenticate('kakao', async (authError, user, info) => {
+    //유저정보가 없으면 여기서 회원가입 시키고 있으면 jwt발급으로 끝냄
     if (user < 1) {
       return res.json({
         isSuccess: false,
