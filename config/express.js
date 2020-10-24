@@ -4,15 +4,15 @@ const methodOverride = require("method-override");
 var cors = require("cors");
 const passport = require('passport')
 const passportConfig = require('../passport')
-const fs = require('fs');
-const key = fs.readFileSync('./keys/key.pem');
-const cert = fs.readFileSync('./keys/my-pubcert.pem');
-const https = require('https');
+// const fs = require('fs');
+// const key = fs.readFileSync('./keys/key.pem');
+// const cert = fs.readFileSync('./keys/my-pubcert.pem');
+// const https = require('https');
 
 
 module.exports = function () {
   const app = express();
-  const server = https.createServer({ key: key, cert: cert }, app);
+  // const server = https.createServer({ key: key, cert: cert }, app);
 
   passportConfig()
 
@@ -39,5 +39,5 @@ module.exports = function () {
   /* Web Admin*/
   // require('../src/web-admin/routes/indexRoute')(app);
 
-  return server;
+  return app;
 };

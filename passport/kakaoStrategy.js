@@ -7,7 +7,7 @@ const { pool } = require("../config/database");
 module.exports = () => {
     passport.use(new KakaoStrategy({
         clientID: process.env.KAKAO_ID,
-        callbackURL: 'http://localhosts:3000/logIn/kakao/callback',
+        callbackURL: 'http://localhost:3000/logIn/kakao/callback',
     }, async (accessToken, refreshToken, profile, done) => {
         console.log('kakao profile', profile);
         const userEmail = profile._json.kakao_account.email

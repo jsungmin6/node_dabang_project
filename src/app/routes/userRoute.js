@@ -9,4 +9,8 @@ module.exports = function (app) {
   app.get("/check", jwtMiddleware, user.check);
   app.get("/logIn/kakao/callback", user.kakaoSignIn);
   app.get('/kakao', user.kakao);
+  // app.get('/facebook', user.facebook);
+  // // app.get('/oauth/facebook/callback', user.facebookSingIn);
+  app.get('/auth/google', user.google);
+  app.get('/auth/google/callback', user.googleSingIn);
 };

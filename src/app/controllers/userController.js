@@ -311,3 +311,61 @@ exports.kakaoSignIn = async function (req, res, next) {
     });
   })(req, res, next)
 }
+
+// exports.facebook = async function (req, res, next) { passport.authenticate('facebook')(req, res, next); };
+
+// exports.facebookSingIn = async function (req, res, next) {
+//   passport.authenticate('facebook', async (authError, user, info) => {
+//     if (user < 1) {
+//       return res.json({
+//         isSuccess: false,
+//         code: 200,
+//         message: "로그인 실패",
+//       });
+//     }
+
+//     res.json({
+//       isSuccess: true,
+//       code: 200,
+//       message: "로그인 성공",
+//     });
+//   }
+//   )(req, res, next);
+// }
+
+exports.google = async function (req, res, next) { passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email'] })(req, res, next); };
+
+exports.googleSingIn = async function (req, res, next) {
+  passport.authenticate('google', async (authError, user, info) => {
+    //유저정보가 없으면 여기서 회원가입 시키고 있으면 jwt발급으로 끝냄
+    if (user < 1) {
+      return res.json({
+        isSuccess: false,
+        code: 200,
+        message: "로그인 실패",
+      });
+    }
+
+    //토큰 생성
+    let token = await jwt.sign(
+      {
+        userIdx: user[0].userIdx,
+        email: user[0].userEmail,
+      }, // 토큰의 내용(payload)
+      secret_config.jwtsecret, // 비밀 키
+      {
+        expiresIn: "365d",
+        subject: "userInfo",
+      } // 유효 시간은 365일
+    );
+
+    console.log(token)
+
+    res.json({
+      jwt: token,
+      isSuccess: true,
+      code: 200,
+      message: "로그인 성공",
+    });
+  })(req, res, next)
+}
